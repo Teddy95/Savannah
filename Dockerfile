@@ -33,11 +33,17 @@ RUN echo "extension=/usr/lib/php/20170718/sqlsrv.so" >> /etc/php/7.2/apache2/php
 	&& echo "extension=/usr/lib/php/20170718/sqlsrv.so" >> /etc/php/7.2/cli/php.ini
 # 	&& echo "extension=/usr/lib/php/20170718/pdo_sqlsrv" >> /etc/php/7.2/cli/php.ini
 
+# Clear directory /var/www/html/
+RUN rm -rf /var/www/html/*
+
 # Copy source
 # COPY . /var/www/html/
 
 # Enable mod_rewrite Apache Module
 RUN a2enmod rewrite
+
+# Copy virtual host config file for Apache
+COPY apache/vhosts.conf /etc/apache2/sites-available/000-default.conf
 
 # Start Apache
 RUN service apache2 restart
