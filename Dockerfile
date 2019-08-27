@@ -9,7 +9,7 @@ LABEL maintainer="Andre Sieverding"
 RUN apt-get update && apt-get install -y apt-utils
 
 # Install PHP
-RUN apt-get update && TZ=Europe/Berlin apt-get -y install \
+RUN apt-get update && apt-get -y install \
 	php7.2 \
 	php-mbstring \
 	php-pear \
@@ -49,14 +49,14 @@ RUN echo "extension=/usr/lib/php/20170718/sqlsrv.so" >> /etc/php/7.2/apache2/php
 	&& echo "zend_extension=/usr/lib/php/20170718/xdebug.so" >> /etc/php/7.2/apache2/php.ini \
 	&& echo "zend_extension=/usr/lib/php/20170718/xdebug.so" >> /etc/php/7.2/cli/php.ini
 
+# Enable mod_rewrite Apache Module
+RUN a2enmod rewrite
+
 # Clear directory /var/www/html/
 RUN rm -rf /var/www/html/*
 
 # Copy source
 # COPY . /var/www/html/
-
-# Enable mod_rewrite Apache Module
-RUN a2enmod rewrite
 
 # Copy virtual host config file for Apache
 COPY apache/vhosts.conf /etc/apache2/sites-available/000-default.conf
