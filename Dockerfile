@@ -45,6 +45,9 @@ RUN a2enmod rewrite
 # Copy virtual host config file for Apache
 COPY apache/vhosts.conf /etc/apache2/sites-available/000-default.conf
 
+# Make www-data owner of all web contents
+RUN chown -R www-data:www-data /var/www/html/
+
 # Start Apache
 RUN service apache2 restart
 
