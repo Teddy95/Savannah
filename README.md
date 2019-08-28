@@ -55,10 +55,13 @@ Following php extensions located in `/usr/lib/php/20170718/`.
 - json
 - libxml
 - mbstring
+- mysqli
+- mysqlnd
 - openssl
 - pcntl
 - pcre
 - PDO
+- pdo_mysql
 - pdo_sqlite
 - pdo_sqlsrv
 - Phar

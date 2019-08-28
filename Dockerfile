@@ -20,6 +20,8 @@ RUN apt-get update && apt-get -y install \
 	php7.2-curl \
 	php7.2-gd \
 	php7.2-sqlite \
+	php7.2-mysql \
+	php7.2-imap \
 	php7.2-zip
 
 # Install Apache
