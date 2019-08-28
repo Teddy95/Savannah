@@ -15,6 +15,13 @@ Run Savannah Image.
 $ docker run -it -p 80:80 -v /path/to/sites:/var/www/html --name phpide stcandre/savannah
 ```
 
+Alternatively you can clone this repository, change the volumes path in `docker-compose.yml` and build & run Savannah with docker-compose.
+
+```bash
+$ docker-compose up
+```
+
+
 Go to <http://localhost>.
 
 ## Infrastructure
