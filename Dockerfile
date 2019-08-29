@@ -68,13 +68,13 @@ COPY apache/xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
 # Make www-data owner of all web contents
 RUN chown -R www-data:www-data /var/www/html/
 
-# Start Apache
-RUN service apache2 restart
-
 # Set Apache ENVs
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
+
+# Start Apache
+RUN service apache2 restart
 
 # Expose Server Port
 EXPOSE 80
