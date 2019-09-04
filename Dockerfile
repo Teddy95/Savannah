@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 LABEL maintainer="Andre Sieverding"
 
 # Install Utils
-RUN apt-get update && apt-get install -y apt-utils
+RUN apt-get update && apt-get install -y apt-utils memcached libmcrypt-dev
 
 # Install PHP
 RUN apt-get update && apt-get -y install \
@@ -23,7 +23,8 @@ RUN apt-get update && apt-get -y install \
 	php7.2-mysql \
 	php7.2-imap \
 	php7.2-zip \
-	libmcrypt-dev
+	php-memcached \
+	php7.2-ldap
 
 # Install Apache
 RUN apt-get update && apt-get install -y apache2
