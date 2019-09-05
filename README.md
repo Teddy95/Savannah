@@ -22,7 +22,7 @@ $ docker-compose up
 ```
 
 
-Go to <http://localhost>.
+Go to <https://localhost>.
 
 ## Infrastructure
 
