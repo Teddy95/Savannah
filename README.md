@@ -52,9 +52,14 @@ Following php extensions located in `/usr/lib/php/20170718/`.
 - gettext
 - hash
 - iconv
+- igbinary
+- imap
 - json
+- ldap
 - libxml
 - mbstring
+- memcached
+- msgpack
 - mysqli
 - mysqlnd
 - openssl

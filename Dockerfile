@@ -46,7 +46,7 @@ RUN pecl install sqlsrv
 RUN pecl install pdo_sqlsrv
 
 # Install MCrypt
-RUN pecl install mcrypt-1.0.2
+# RUN pecl install mcrypt-1.0.2
 
 # Install XDebug
 RUN pecl install xdebug
@@ -55,8 +55,8 @@ RUN pecl install xdebug
 RUN echo "extension=/usr/lib/php/20170718/sqlsrv.so" >> /etc/php/7.2/apache2/php.ini \
 	&& echo "extension=/usr/lib/php/20170718/pdo_sqlsrv.so" >> /etc/php/7.2/mods-available/pdo.ini \
 	&& echo "extension=/usr/lib/php/20170718/sqlsrv.so" >> /etc/php/7.2/cli/php.ini \
-	&& echo "zend_extension=/usr/lib/php/20170718/mcrypt.so" >> /etc/php/7.2/apache2/php.ini \
-	&& echo "zend_extension=/usr/lib/php/20170718/mcrypt.so" >> /etc/php/7.2/cli/php.ini \
+	# && echo "zend_extension=/usr/lib/php/20170718/mcrypt.so" >> /etc/php/7.2/apache2/php.ini \
+	# && echo "zend_extension=/usr/lib/php/20170718/mcrypt.so" >> /etc/php/7.2/cli/php.ini \
 	&& echo "zend_extension=/usr/lib/php/20170718/xdebug.so" >> /etc/php/7.2/apache2/php.ini \
 	&& echo "zend_extension=/usr/lib/php/20170718/xdebug.so" >> /etc/php/7.2/cli/php.ini
 
