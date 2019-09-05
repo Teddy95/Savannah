@@ -72,13 +72,15 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 RUN rm -rf /var/www/html/*
 
 # Copy source
-# COPY . /var/www/html/
+COPY /www/ /var/www/html/
 
 # Copy virtual host config file for Apache
-COPY apache/vhosts.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/apache2/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/apache2/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+COPY docker/apache2/ssl-params.conf /etc/apache2/conf-available/ssl-params.conf
 
 # Copy XDebug Configurations
-COPY apache/xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
+COPY docker/php/xdebug.ini /etc/php/7.2/mods-available/xdebug.ini
 
 # Make www-data owner of all web contents
 RUN chown -R www-data:www-data /var/www/html/
@@ -94,14 +96,27 @@ WORKDIR /var/www/html/
 # Install Composer Dependencies
 RUN composer install
 
-# Enable mod_rewrite Apache Module
+# Generate certificates for ssl
+RUN openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -subj \
+    "/C=US/ST=California/L=Los Angeles/O=Paradise Engineering/CN=localhost" \
+    -keyout /etc/ssl/private/apache.key -out /etc/ssl/certs/apache.crt
+
+# Enable Apache Modules
 RUN a2enmod rewrite
+RUN a2enmod ssl
+
+# Enable Apache virtual hosts (ssl)
+RUN a2ensite default-ssl
+
+# Enable Apache ssl configs
+RUN a2enconf ssl-params
 
 # Start Apache
 RUN service apache2 restart
 
 # Expose Server Port
 EXPOSE 80
+EXPOSE 443
 
 # Show Apache Output
 CMD ["apachectl", "-D", "FOREGROUND"]
